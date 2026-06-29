@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Tool</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <span class="icon">🔐</span>
+    <h1>Password Tool</h1>
+    <p>Generate secure passwords or check strength</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="generate">Generate</button>
+    <button class="tab" data-tab="check">Check Strength</button>
+  </nav>
+
+  <!-- GENERATE TAB -->
+  <section id="generate" class="active">
+    <div class="card">
+      <div class="card-title">Configuration</div>
+
+      <div class="slider-row">
+        <span class="slider-label">Length</span>
+        <input type="range" id="lengthSlider" min="8" max="64" value="16">
+        <span class="length-value" id="lengthVal">16</span>
+      </div>
+
+      <div class="options-grid">
+        <label class="option-label">
+          <input type="checkbox" id="optUpper" checked>
+          Uppercase
+          <span class="badge">A–Z</span>
+        </label>
+        <label class="option-label">
+          <input type="checkbox" id="optLower" checked>
+          Lowercase
+          <span class="badge">a–z</span>
+        </label>
+        <label class="option-label">
+          <input type="checkbox" id="optDigits" checked>
+          Numbers
+          <span class="badge">0–9</span>
+        </label>
+        <label class="option-label">
+          <input type="checkbox" id="optSymbols" checked>
+          Symbols
+          <span class="badge">!@#…</span>
+        </label>
+        <label class="option-label full-width">
+          <input type="checkbox" id="optNoAmbig">
+          Exclude ambiguous characters
+          <span class="badge">0 O l 1 I |</span>
+        </label>
+      </div>
+
+      <button class="btn-generate" id="btnGenerate">Generate 3 Passwords</button>
+    </div>
+
+    <div class="card" id="resultCard">
+      <div class="card-title">Generated Passwords</div>
+      <div class="pw-list" id="pwList">
+        <div class="empty-state">
+          <span class="icon">✨</span>
+          Click generate to get started
+        </div>
+      </div>
+      <div class="strength-block" id="genStrength" style="display:none">
+        <div class="strength-header">
+          <span class="strength-label">Strength</span>
+          <span class="strength-rating" id="genRating"></span>
+        </div>
+        <div class="strength-bar-track">
+          <div class="strength-bar-fill" id="genBar"></div>
+        </div>
+        <div class="crack-time">Estimated crack time: <span id="genCrack"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECK TAB -->
+  <section id="check">
+    <div class="card">
+      <div class="card-title">Paste Your Password</div>
+      <textarea
+        class="pw-input"
+        id="checkInput"
+        rows="3"
+        placeholder="Paste or type a password here…"
+        spellcheck="false"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+      ></textarea>
+    </div>
+
+    <div class="card" id="checkResultCard" style="display:none">
+      <div class="card-title">Strength Analysis</div>
+      <div class="strength-block">
+        <div class="strength-header">
+          <span class="strength-label">Strength</span>
+          <span class="strength-rating" id="checkRating"></span>
+        </div>
+        <div class="strength-bar-track">
+          <div class="strength-bar-fill" id="checkBar"></div>
+        </div>
+        <div class="crack-time">Estimated crack time: <span id="checkCrack"></span></div>
+      </div>
+      <div class="feedback-list" id="checkFeedback"></div>
+    </div>
+  </section>
+</div>
+
+<!-- crypto.js must load before ui.js (ui.js calls functions defined there) -->
+<script src="js/crypto.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
